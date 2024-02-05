@@ -95,17 +95,25 @@ const rankCheck = score => {
   return `${score}文字打てました！\n${text}\n【OK】リトライ / 【キャンセル】終了`;
 };
 
-// ゲームを終了
+  // ゲームを終了
 const gameOver = id => {
+
+  // タイマーが0になったら「タイムアップ」を表示
+  setTimeout(() => { 
+
   clearInterval(id);
+
+  wrap.textContent = 'タイムアップ！';
 
   const result = confirm(rankCheck(score));
 
   // OKボタンをクリックされたらリロードする
   if(result == true) {
     window.location.reload();
-  }
+  } 
+  }, 100);
 };
+
 
 // カウントダウンタイマー
 const timer = () => {
@@ -144,7 +152,3 @@ start.addEventListener('click', () => {
 
 untypedfield.textContent = 'スタートボタンで開始';
 
-// タイマーが0になったら「タイムアップ」を表示
-setTimeout(() => {
-  wrap.textContent = 'タイムアップ！';
-}, 60000);
